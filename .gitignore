@@ -2,8 +2,8 @@ client.js.txt
 server.ts.txt
 setup*.md
 Caddyfile
-backend/*
-functions/*
+backend/
+functions/
 
 
 
