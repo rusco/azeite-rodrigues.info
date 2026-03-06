@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Subscribe Test 📅</title>
+</head>
+
+<body style="font-family: sans-serif; padding: 2rem;">
+    <h1>Test</h1>
+    <button id="btn" style="padding: 0.5rem 1rem;">Go</button>
+    <pre id="output" style="margin-top: 1rem; background: #eee; padding: 1rem;"></pre>
+
+    <script>
+        async function test() {
+            try {
+                const res = await fetch("https://api.azeite-rodrigues.info/health", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                const data = await res.json();
+                console.log("API response:", data);
+
+                document.getElementById("output").textContent = "Status: " + res.status + "\n" + JSON.stringify(data, null, 2);
+
+            } catch (err) {
+                console.error("Error calling API:", err);
+                document.getElementById("output").textContent = "Error: " + err;
+            }
+        }
+
+        document.getElementById("btn").addEventListener("click", () => {
+
+            test();
+        });
+    </script>
+</body>
+
+</html>
