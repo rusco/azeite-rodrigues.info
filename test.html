@@ -407,13 +407,13 @@
         <div class="panel">
             <div class="section-title">
                 <h3>Configuration</h3>
-                <span class="small">Defaults to <code>window.location.origin</code></span>
+                <span class="small">Defaults to <code>https://api.azeite-rodrigues.info</code></span>
             </div>
 
             <div class="grid">
                 <div>
                     <label for="baseUrl">Base URL (origin of your API)</label>
-                    <input id="baseUrl" type="url" placeholder="https://rebhan.duckdns.org" />
+                    <input id="baseUrl" type="url" placeholder="https://api.azeite-rodrigues.info" />
                     <div class="small">Your API endpoints are relative to this, e.g. <code>/api/subscribe</code>.</div>
                 </div>
 
@@ -608,7 +608,7 @@
             <div style="margin-top:10px">
                 <pre id="healthOutput" class="log" aria-live="polite"></pre>
             </div>
-        </div>ç
+        </div>
     </div>
 
     <script>
@@ -650,9 +650,7 @@
                 try {
                     const res = await fetch(url, { method: 'GET' });
                     const ct = res.headers.get('content-type') || '';
-                    const data = ct.includes('application/json')
-                        ? await res.json()
-                        : await res.text();
+                    const data = ct.includes('application/json') ? await res.json() : await res.text();
                     printHealth('GET /health', data, res.status);
                 } catch (err) {
                     printHealth('GET /health ERROR', String(err));
@@ -675,7 +673,8 @@
             const adminTokenEl = $('#adminToken');
             const webhookTokenEl = $('#webhookToken');
 
-            baseUrlEl.value = window.location.origin;
+            //baseUrlEl.value = window.location.origin;
+            baseUrlEl.value = 'https://api.azeite-rodrigues.info';
 
             function url(path) {
                 const b = baseUrlEl.value.replace(/\/+$/, '');
