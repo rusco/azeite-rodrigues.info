@@ -1,29 +1,985 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Health Test 2026-03-06T21:51:00</title>
-</head>
-<body style="font-family:sans-serif;padding:2rem;">
-  <h1>Health Test</h1>
-  <button id="btn" style="padding:0.5rem 1rem;">Go ➡️</button>
-  <pre id="output" style="margin-top:1rem;background:#eee;padding:1rem;"></pre>
 
-  <script>
-    async function test() {
-      try {
-        const res = await fetch("https://api.azeite-rodrigues.info/health", {
-          method: "GET"
-        });
-        const data = await res.json();
-        document.getElementById("output").textContent =
-          "Status: " + res.status + "\n" + JSON.stringify(data, null, 2);
-      } catch (err) {
-        document.getElementById("output").textContent = "Error: " + err;
-        console.error(err);
-      }
-    }
-    document.getElementById("btn").addEventListener("click", test);
-  </script>
+<head>
+    <meta charset="utf-8" />
+    <title>Newsletter API Tester</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Fonts: artisanal headings + rounded body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600;1,700&family=Nunito:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* -----------------------------------------------------------
+       Light Olive Oil Shop Theme (Artisanal + Glassmorphism + Micro-Animations)
+       ----------------------------------------------------------- */
+        :root {
+            /* Backgrounds */
+            --bg: #FAF9F5;
+            /* soft warm shop background */
+            --panel: #FFFFFF;
+            /* base for fallback */
+            --panel-border: #E7E2D6;
+            /* subtle beige border */
+
+            /* Stone texture controls (set opacity to 0 to disable) */
+            --texture-color-1: 38, 35, 30;
+            /* warm brownish specks */
+            --texture-color-2: 140, 130, 110;
+            --texture-opacity: 0.08;
+            /* 0.00 – 0.15 (subtle) */
+
+            /* Text colors */
+            --ink: #2E3A26;
+            /* dark olive text */
+            --muted: #7B806F;
+            /* soft green-grey */
+
+            /* Primary Olive Brand Color */
+            --primary: #6A8F3F;
+            /* fresh olive green */
+            --primary-light: #89A95C;
+            /* softer olive for accents */
+            --primary-dark: #4C692B;
+            /* darker olive for headings */
+
+            /* Accent color (natural golden highlight) */
+            --accent: #C6A75E;
+            /* light golden olive tone */
+            --accent-dark: #A68741;
+            /* slightly deeper gold */
+
+            /* Semantic colors (soft, natural) */
+            --ok: #5F8B3A;
+            /* green success */
+            --warn: #E2B13C;
+            /* warm gold warning */
+            --err: #C04A4A;
+            /* soft red for errors */
+
+            /* Inputs */
+            --input-bg: #FFFFFF;
+            --input-border: #D6D2C4;
+            --input-border-focus: var(--primary);
+
+            /* Buttons */
+            --btn-bg: #FFFFFF;
+            --btn-border: #DCD7C8;
+            --btn-hover: #F4F1E8;
+            /* warm beige hover */
+
+            /* Code blocks / log area */
+            --code-bg: #F3F1EA;
+            /* light beige-sand */
+            --code-border: #DCD7C8;
+
+            /* Elevation + Glass */
+            --panel-alpha: 0.58;
+            /* transparency of panels */
+            --glass-blur: 14px;
+            --glass-sat: 1.35;
+
+            /* Typography scale */
+            --fs-base: 15px;
+            --lh-base: 1.55;
+            --fs-h1: clamp(28px, 4.0vw, 38px);
+            --fs-h2: clamp(22px, 3.0vw, 28px);
+            --fs-h3: clamp(18px, 2.3vw, 22px);
+            --fs-h4: 18px;
+            --fs-h5: 16px;
+            --fs-h6: 14px;
+            --fs-caption: 12px;
+        }
+
+        /* -------- Base, texture and typography -------- */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Nunito', system-ui, Segoe UI, Roboto, Arial, sans-serif;
+            font-size: var(--fs-base);
+            line-height: var(--lh-base);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            position: relative;
+            min-height: 100%;
+        }
+
+        /* Subtle stone-like texture using layered radial gradients */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(1px 1px at 15% 20%, rgba(var(--texture-color-1), var(--texture-opacity)) 0, transparent 60%),
+                radial-gradient(1px 1px at 70% 30%, rgba(var(--texture-color-2), var(--texture-opacity)) 0, transparent 60%),
+                radial-gradient(1px 1px at 40% 70%, rgba(var(--texture-color-1), var(--texture-opacity)) 0, transparent 60%),
+                radial-gradient(1px 1px at 85% 80%, rgba(var(--texture-color-2), var(--texture-opacity)) 0, transparent 60%);
+            background-repeat: repeat;
+            background-size: 250px 250px, 320px 320px, 270px 270px, 300px 300px;
+            z-index: 0;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* -------- Headings: artisanal italic (Cormorant Garamond) -------- */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            color: var(--primary-dark);
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 2px rgba(80, 70, 50, 0.15);
+            margin: .5rem 0 .75rem;
+        }
+
+        h1 {
+            font-size: var(--fs-h1);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: var(--fs-h2);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: var(--fs-h3);
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: var(--fs-h4);
+            font-weight: 600;
+        }
+
+        h5 {
+            font-size: var(--fs-h5);
+            font-weight: 600;
+        }
+
+        h6 {
+            font-size: var(--fs-h6);
+            font-weight: 600;
+        }
+
+        .caption {
+            font-size: var(--fs-caption);
+            color: var(--muted);
+            letter-spacing: .2px;
+        }
+
+        a {
+            color: var(--accent-dark);
+        }
+
+        /* generic grid for most sections */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        /* 2-column grid (50%/50%), stacks on small screens */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 720px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* -------- Panels: stronger glassmorphism -------- */
+        .panel {
+            background: rgba(255, 255, 255, var(--panel-alpha));
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+            box-shadow:
+                0 12px 28px rgba(60, 50, 30, 0.10),
+                0 4px 8px rgba(60, 50, 30, 0.06);
+            transition:
+                transform .28s cubic-bezier(.2, .7, .3, 1),
+                box-shadow .28s ease,
+                background-color .25s ease;
+        }
+
+        @media (hover:hover) {
+            .panel:hover {
+                transform: translateY(-4px);
+                box-shadow:
+                    0 18px 38px rgba(60, 50, 30, 0.14),
+                    0 6px 12px rgba(60, 50, 30, 0.08);
+                background: rgba(255, 255, 255, 0.63);
+            }
+        }
+
+        .panel h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        label {
+            display: block;
+            margin: .5rem 0 .25rem;
+            color: var(--muted);
+            text-shadow: 0 1px 1px rgba(240, 235, 220, 0.5);
+        }
+
+        /* -------- Inputs: stronger micro-animations -------- */
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 10px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--ink);
+            padding: 11px 12px;
+            outline: none;
+            transition:
+                border .18s ease,
+                box-shadow .28s ease,
+                transform .25s cubic-bezier(.2, .7, .3, 1);
+            will-change: transform, box-shadow;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--input-border-focus);
+            box-shadow:
+                0 0 0 4px rgba(106, 143, 63, 0.28),
+                0 10px 20px rgba(60, 50, 30, 0.12);
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        textarea {
+            min-height: 110px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .row>* {
+            flex: 1;
+        }
+
+        /* -------- Buttons: rounded + stronger interactions -------- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            border: 1px solid var(--btn-border);
+            background: var(--btn-bg);
+            color: var(--primary-dark);
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition:
+                background .18s ease,
+                border .18s ease,
+                transform .22s cubic-bezier(.25, .75, .45, 1.2),
+                box-shadow .25s ease;
+            will-change: transform, box-shadow;
+            text-shadow: 0 1px 1px rgba(240, 235, 220, 0.5);
+        }
+
+        @media (hover:hover) {
+            .btn:hover {
+                background: var(--btn-hover);
+                border-color: var(--primary);
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 0 10px 22px rgba(60, 50, 30, 0.12);
+            }
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(.98);
+            box-shadow: 0 2px 6px rgba(60, 50, 30, 0.06);
+        }
+
+        .btn.ok {
+            border-color: var(--ok);
+            color: var(--ok);
+        }
+
+        .btn.warn {
+            border-color: var(--warn);
+            color: var(--warn);
+        }
+
+        .btn.err {
+            border-color: var(--err);
+            color: var(--err);
+        }
+
+        .small {
+            font-size: var(--fs-caption);
+            color: var(--muted);
+        }
+
+        .log {
+            white-space: pre-wrap;
+            background: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 10px;
+            padding: 10px;
+            min-height: 120px;
+            color: var(--ink);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 12.5px;
+            box-shadow: inset 0 1px 2px rgba(60, 50, 30, 0.05);
+        }
+
+        /* Olive pill (non-italic) */
+        .pill {
+            display: inline-block;
+            border: 1px solid var(--primary-light);
+            background: var(--primary-light);
+            color: #fff;
+            border-radius: 999px;
+            padding: 3px 10px;
+            margin-left: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            font-style: normal;
+            /* important: not italic */
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted);
+        }
+
+        code {
+            background: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 6px;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Newsletter API Tester <span class="pill">Echo v5 · SQLite WAL</span></h1>
+
+        <!-- CONFIG -->
+        <div class="panel">
+            <div class="section-title">
+                <h3>Configuration</h3>
+                <span class="small">Defaults to <code>window.location.origin</code></span>
+            </div>
+
+            <div class="grid">
+                <div>
+                    <label for="baseUrl">Base URL (origin of your API)</label>
+                    <input id="baseUrl" type="url" placeholder="https://rebhan.duckdns.org" />
+                    <div class="small">Your API endpoints are relative to this, e.g. <code>/api/subscribe</code>.</div>
+                </div>
+
+                <div>
+                    <label for="adminToken">Admin Token (Bearer)</label>
+                    <input id="adminToken" type="password" placeholder="ADMIN_TOKEN" value="" />
+                    <div class="small">Used for <code>/admin/*</code> calls. Not stored anywhere.</div>
+                </div>
+
+                <div>
+                    <label for="webhookToken">Webhook Token (X-Webhook-Token)</label>
+                    <input id="webhookToken" type="password" placeholder="WEBHOOK_TOKEN (optional for webhook test)"
+                        value="" />
+                </div>
+            </div>
+
+            <div style="margin-top:10px">
+                <button class="btn" id="useOriginBtn">Use current origin</button>
+                <button class="btn" id="clearLogBtn">Clear log</button>
+            </div>
+        </div>
+
+        <!-- PUBLIC ENDPOINTS -->
+        <h2>Public Endpoints</h2>
+
+        <div class="grid">
+            <!-- Subscribe -->
+            <div class="panel">
+                <h3>Subscribe <span class="pill">POST /api/subscribe</span></h3>
+
+                <label for="subEmail">Email</label>
+                <input id="subEmail" type="email" placeholder="user@example.com" />
+
+                <label for="subName">Name (optional)</label>
+                <input id="subName" type="text" placeholder="Jane Doe" />
+
+                <div style="margin-top:8px">
+                    <button class="btn ok" id="btnSubscribe">Subscribe</button>
+                </div>
+
+                <div class="small" style="margin-top:8px">
+                    Sends JSON: <code>{"email": "...", "name": "..."}</code>
+                </div>
+            </div>
+
+            <!-- Confirm -->
+            <div class="panel">
+                <h3>Confirm <span class="pill">GET /confirm?token=...</span></h3>
+
+                <label for="confirmToken">Token</label>
+                <input id="confirmToken" type="text" placeholder="paste token from confirmation email" />
+
+                <div style="margin-top:8px">
+                    <button class="btn ok" id="btnConfirm">Confirm Subscription</button>
+                </div>
+
+                <div class="small" style="margin-top:8px">
+                    Opens <code>/confirm?token=...</code>. You’ll supply the token from the email you received.
+                </div>
+            </div>
+
+            <!-- Unsubscribe by Token -->
+            <div class="panel">
+                <h3>Unsubscribe by Token <span class="pill">GET /unsubscribe?token=...</span></h3>
+
+                <label for="unsubToken">Token</label>
+                <input id="unsubToken" type="text" placeholder="token from confirmation or link" />
+
+                <div style="margin-top:8px">
+                    <button class="btn warn" id="btnUnsubToken">Unsubscribe (token)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 50% / 50% row: Unsubscribe by Email + Brevo Webhook -->
+        <div class="grid-2" style="margin-top:16px">
+            <!-- Unsubscribe by Email (50%) -->
+            <div class="panel">
+                <h3>Unsubscribe by Email <span class="pill">POST /unsubscribe</span></h3>
+
+                <label for="unsubEmail">Email</label>
+                <input id="unsubEmail" type="email" placeholder="user@example.com" />
+
+                <div class="row" style="margin-top:8px">
+                    <button class="btn warn" id="btnUnsubEmailJson">Unsubscribe JSON</button>
+                    <button class="btn warn" id="btnUnsubEmailForm">Unsubscribe Form</button>
+                </div>
+
+                <div class="small" style="margin-top:8px">
+                    JSON body: <code>{"email": "..."}</code> or as <code>application/x-www-form-urlencoded</code>.
+                </div>
+            </div>
+
+            <!-- Brevo Webhook (50%) -->
+            <div class="panel">
+                <h3>Brevo Webhook (test) <span class="pill">POST /webhooks/brevo</span></h3>
+
+                <label for="whEvent">Event JSON (array of events)</label>
+                <textarea id="whEvent">[
+  {
+    "event":"delivered",
+    "email":"user@example.com",
+    "message-id":"test-msg-1",
+    "date":"2026-01-26T12:34:56Z"
+  }
+]</textarea>
+
+                <div class="small">Header <code>X-Webhook-Token</code> is taken from the Configuration panel.</div>
+
+                <div style="margin-top:8px">
+                    <button class="btn" id="btnWebhook">Send Webhook</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN SECTION -->
+        <h2 style="margin-top:18px">Admin Endpoints (bottom)</h2>
+
+        <div class="grid">
+            <!-- Create Issue -->
+            <div class="panel">
+                <h3>Create Issue <span class="pill">POST /admin/issue</span></h3>
+
+                <label for="issueSubject">Subject</label>
+                <input id="issueSubject" type="text" placeholder="January Newsletter" />
+
+                <label for="issuePreheader">Preheader (optional)</label>
+                <input id="issuePreheader" type="text" placeholder="Short preview text" />
+
+                <label for="issueHTML">HTML</label>
+                <textarea id="issueHTML"><h1>Hello!</h1><p>This is a test HTML body.</p></textarea>
+
+                <label for="issueText">Text (optional)</label>
+                <textarea id="issueText">Hello! This is a test text body.</textarea>
+
+                <div style="margin-top:8px">
+                    <button class="btn ok" id="btnCreateIssue">Create Issue</button>
+                </div>
+
+                <div class="small" style="margin-top:8px">
+                    Requires <code>Authorization: Bearer &lt;ADMIN_TOKEN&gt;</code>.
+                </div>
+            </div>
+
+            <!-- Send Issue -->
+            <div class="panel">
+                <h3>Send Issue <span class="pill">POST /admin/send</span></h3>
+
+                <label for="sendIssueId">Issue ID</label>
+                <input id="sendIssueId" type="text" placeholder="e.g. 1" />
+
+                <div style="margin-top:8px">
+                    <button class="btn ok" id="btnSendIssue">Send to Confirmed Subscribers</button>
+                </div>
+
+                <div class="small" style="margin-top:8px">
+                    Creates deliveries for all <code>status='confirmed'</code> subscribers.
+                </div>
+            </div>
+        </div>
+
+        <!-- LOG -->
+        <div class="panel" style="margin-top:16px">
+            <h3>Response Log</h3>
+            <div id="log" class="log"></div>
+        </div>
+
+
+
+        <footer>
+            <p class="small">
+                Tip: Host this file on the same origin as the Go service to avoid CORS. If you must open it
+                from another origin, enable CORS in Echo
+                (e.g., <code>e.Use(middleware.CORS())</code>) and configure allowed headers
+                (<code>Authorization</code>, <code>X-Webhook-Token</code>, etc.).
+            </p>
+        </footer>
+
+        <!-- HEALTH TEST -->
+        <h2 style="margin-top:18px">Health Test</h2>
+
+        <div class="panel">
+            <div class="section-title">
+                <h3>Ping /health <span class="pill">GET /health</span></h3>
+                <span class="small">Checks uptime and returns ISO timestamp</span>
+            </div>
+
+            <div class="row" style="margin-top:6px">
+                <button id="healthBtn" class="btn ok">Go ➜</button>
+            </div>
+
+            <div style="margin-top:10px">
+                <pre id="healthOutput" class="log" aria-live="polite"></pre>
+            </div>
+        </div>ç
+    </div>
+
+    <script>
+        // --- Health Test integration ---
+        (function () {
+            const healthBtn = document.getElementById('healthBtn');
+            const healthOutput = document.getElementById('healthOutput');
+
+            if (!healthBtn || !healthOutput) return;
+
+            function getBase() {
+                // Reuse the existing Base URL field if present (your page already has it)
+                const el = document.getElementById('baseUrl');
+                if (el && el.value) {
+                    const trimmed = el.value.replace(/\/+$/, '');
+                    return trimmed;
+                }
+                // Fallback to your fixed API origin if the field doesn't exist
+                return 'https://api.azeite-rodrigues.info';
+            }
+
+            function printHealth(title, payload, status) {
+                const t = new Date().toISOString();
+                const head = `\n=== ${title} @ ${t} ===`;
+                const body =
+                    typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2);
+                const statusLine = (typeof status === 'number') ? `Status: ${status}\n` : '';
+                healthOutput.textContent += head + '\n' + statusLine + body + '\n';
+                healthOutput.scrollTop = healthOutput.scrollHeight;
+            }
+
+            async function runHealth() {
+                const origin = getBase();
+                const url = origin + '/health';
+                healthBtn.disabled = true;
+                const original = healthBtn.textContent;
+                healthBtn.textContent = 'Checking…';
+
+                try {
+                    const res = await fetch(url, { method: 'GET' });
+                    const ct = res.headers.get('content-type') || '';
+                    const data = ct.includes('application/json')
+                        ? await res.json()
+                        : await res.text();
+                    printHealth('GET /health', data, res.status);
+                } catch (err) {
+                    printHealth('GET /health ERROR', String(err));
+                    console.error(err);
+                } finally {
+                    healthBtn.textContent = original;
+                    healthBtn.disabled = false;
+                }
+            }
+
+            healthBtn.addEventListener('click', runHealth);
+        })();
+    </script>
+
+    <script>
+        (function () {
+            const $ = sel => document.querySelector(sel);
+            const logEl = $('#log');
+            const baseUrlEl = $('#baseUrl');
+            const adminTokenEl = $('#adminToken');
+            const webhookTokenEl = $('#webhookToken');
+
+            baseUrlEl.value = window.location.origin;
+
+            function url(path) {
+                const b = baseUrlEl.value.replace(/\/+$/, '');
+                return b + path;
+            }
+
+            function appendLog(title, payload) {
+                const time = new Date().toISOString();
+                const item = [
+                    `\n=== ${title} @ ${time} ===`,
+                    typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2)
+                ].join('\n');
+                logEl.textContent += item + '\n';
+                logEl.scrollTop = logEl.scrollHeight;
+            }
+
+            async function doFetch({ path, method = 'GET', headers = {}, body }) {
+                try {
+                    const res = await fetch(url(path), { method, headers, body });
+                    const ct = res.headers.get('content-type') || '';
+                    const data = ct.includes('application/json') ? await res.json() : await res.text();
+                    appendLog(`${method} ${path}`, { status: res.status, data });
+                } catch (err) {
+                    appendLog(`${method} ${path} ERROR`, String(err));
+                }
+            }
+
+            $('#useOriginBtn').onclick = () => baseUrlEl.value = window.location.origin;
+            $('#clearLogBtn').onclick = () => logEl.textContent = '';
+
+            // subscribe
+            $('#btnSubscribe').onclick = async () => {
+                const email = $('#subEmail').value.trim();
+                const name = $('#subName').value.trim();
+                if (!email) return appendLog('Subscribe', 'Missing email');
+                await doFetch({
+                    path: '/api/subscribe',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, name: name || undefined })
+                });
+            };
+
+            // confirm
+            $('#btnConfirm').onclick = () => {
+                const token = $('#confirmToken').value.trim();
+                if (!token) return appendLog('Confirm', 'Missing token');
+                doFetch({ path: `/confirm?token=${encodeURIComponent(token)}`, method: 'GET' });
+            };
+
+            // unsubscribe token
+            $('#btnUnsubToken').onclick = () => {
+                const token = $('#unsubToken').value.trim();
+                if (!token) return appendLog('Unsubscribe (token)', 'Missing token');
+                doFetch({ path: `/unsubscribe?token=${encodeURIComponent(token)}`, method: 'GET' });
+            };
+
+            // unsubscribe JSON
+            $('#btnUnsubEmailJson').onclick = () => {
+                const email = $('#unsubEmail').value.trim();
+                if (!email) return appendLog('Unsubscribe (JSON)', 'Missing email');
+                doFetch({
+                    path: '/unsubscribe',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+            };
+
+            // unsubscribe form
+            $('#btnUnsubEmailForm').onclick = () => {
+                const email = $('#unsubEmail').value.trim();
+                if (!email) return appendLog('Unsubscribe (Form)', 'Missing email');
+                const form = new URLSearchParams();
+                form.set('email', email);
+                doFetch({
+                    path: '/unsubscribe',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: form.toString()
+                });
+            };
+
+            // webhook
+            $('#btnWebhook').onclick = () => {
+                const token = $('#webhookToken').value.trim();
+                let payload;
+                try { payload = JSON.parse($('#whEvent').value); }
+                catch { return appendLog('Webhook', 'Invalid JSON'); }
+                doFetch({
+                    path: '/webhooks/brevo',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { 'X-Webhook-Token': token } : {})
+                    },
+                    body: JSON.stringify(payload)
+                });
+            };
+
+            // admin create issue
+            $('#btnCreateIssue').onclick = () => {
+                const token = $('#adminToken').value.trim();
+                if (!token) return appendLog('Create Issue', 'Missing admin token');
+                const subject = $('#issueSubject').value.trim();
+                const preheader = $('#issuePreheader').value.trim();
+                const html = $('#issueHTML').value;
+                const text = $('#issueText').value;
+                if (!subject || !html) return appendLog('Create Issue', 'Missing fields');
+                doFetch({
+                    path: '/admin/issue',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ subject, preheader, html, text })
+                });
+            };
+
+            // admin send issue
+            $('#btnSendIssue').onclick = () => {
+                const token = $('#adminToken').value.trim();
+                if (!token) return appendLog('Send Issue', 'Missing admin token');
+                const issueId = $('#sendIssueId').value.trim();
+                if (!issueId) return appendLog('Send Issue', 'Missing issue ID');
+                doFetch({
+                    path: '/admin/send',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ issue_id: Number(issueId) })
+                });
+            };
+
+
+            (function () {
+                const emailHtml = `<!-- ================================     OLIVE THEME EMAIL-SAFE TEMPLATE     ================================ -->
+<!— Preheader text: appears in inbox preview, hidden in body —>
+<span style="display:none!important;mso-hide:all;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;">
+  Your January newsletter  artisanal notes from the olive grove.
+</span>
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:0;padding:0;background:#FAF9F5;">
+  <tr>
+    <td align="center" style="padding:20px 8px;">
+      <!--[if mso]>
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td>
+      <![endif]-->
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:640px;background:#FFFFFF;border:1px solid #E7E2D6;border-radius:14px;">
+        <!-- Header band -->
+        <tr>
+          <td align="center" style="padding:26px 22px 6px 22px;">
+            <h1 style="
+              margin:0 0 6px 0;
+              font-family: Georgia,'Times New Roman',Times,serif;
+              font-weight:700;
+              font-style:italic;
+              font-size:30px;
+              line-height:1.2;
+              color:#4C692B;">
+              Newsletter
+              <span style="
+                display:inline-block;
+                vertical-align:middle;
+                margin-left:8px;
+                padding:4px 10px;
+                background:#89A95C;
+                color:#fff;
+                border-radius:999px;
+                font:700 12px/1 Arial,Helvetica,sans-serif;
+                font-style:normal;">Olive</span>
+            </h1>
+            <p style="margin:4px 0 0 0;font:14px/1.5 Arial,Helvetica,sans-serif;color:#7B806F;">
+              A light artisanal look, adapted for email clients
+            </p>
+          </td>
+        </tr>
+
+        <!-- Hero image (optional) -->
+        <tr>
+          <td style="padding:10px 22px 0 22px;">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop"
+                 width="596" alt="Olive branch"
+                 style="display:block;width:100%;max-width:596px;height:auto;border-radius:10px;border:1px solid #E7E2D6;">
+          </td>
+        </tr>
+
+        <!-- Body panel -->
+        <tr>
+          <td style="padding:18px 22px 6px 22px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                   style="background:#FFFFFF;border:1px solid #ECE7DB;border-radius:12px;">
+              <tr>
+                <td style="padding:18px;">
+                  <h2 style="margin:0 0 10px 0;font-family:Georgia,'Times New Roman',Times,serif;font-weight:700;font-style:italic;font-size:22px;line-height:1.25;color:#6A8F3F;">
+                    Hello, friend 👋
+                  </h2>
+                  <p style="margin:0 0 12px 0;font:15px/1.55 Arial,Helvetica,sans-serif;color:#2E3A26;">
+                    Welcome to our latest update. We’re keeping the **olive palette** from your web UI
+                    while using **email safe CSS** so it renders consistently in Outlook, Gmail, Apple Mail, etc.
+                  </p>
+                  <p style="margin:0 0 12px 0;font:15px/1.55 Arial,Helvetica,sans-serif;color:#2E3A26;">
+                    This block uses <strong>tables + inline styles</strong> (no external fonts, no filters),
+                    rounded cards, and serif headings to echo your page design.
+                  </p>
+                  <ul style="margin:0 0 12px 18px;padding:0;font:15px/1.55 Arial,Helvetica,sans-serif;color:#2E3A26;">
+                    <li>Heading color: <code style="background:#F3F1EA;border:1px solid #DCD7C8;border-radius:4px;padding:0 4px;">#4C692B</code></li>
+                    <li>Accent olive: <code style="background:#F3F1EA;border:1px solid #DCD7C8;border-radius:4px;padding:0 4px;">#6A8F3F</code></li>
+                    <li>Muted copy: <span style="color:#7B806F;">#7B806F</span></li>
+                  </ul>
+
+                  <!-- Button -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:10px 0 6px 0;">
+                    <tr>
+                      <td align="center" bgcolor="#6A8F3F" style="border-radius:10px;">
+                        <a href="https://rebhan.duckdns.org"
+                           style="display:inline-block;padding:12px 18px;font:700 14px/1 Arial,Helvetica,sans-serif;
+                                  color:#ffffff;text-decoration:none;border-radius:10px;border:1px solid #4C692B;">
+                          View on Site
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <p style="margin:10px 0 0 0;font:12.5px/1.5 Arial,Helvetica,sans-serif;color:#7B806F;">
+                    Tip: If your email requires more text, keep paragraphs to ~60-80 characters per line for readability.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Secondary columns -->
+        <tr>
+          <td style="padding:6px 22px 6px 22px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <!-- Left card -->
+                <td width="50%" valign="top" style="padding:8px 8px 8px 0;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                         style="background:#FFFFFF;border:1px solid #ECE7DB;border-radius:12px;">
+                    <tr>
+                      <td style="padding:14px;">
+                        <h3 style="margin:0 0 8px 0;font:italic 600 18px/1.25 Georgia,'Times New Roman',Times,serif;color:#6A8F3F;">
+                          What’s new
+                        </h3>
+                        <p style="margin:0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#2E3A26;">
+                          Short bullets about improvements, releases, or blog posts.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <!-- Right card -->
+                <td width="50%" valign="top" style="padding:8px 0 8px 8px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                         style="background:#FFFFFF;border:1px solid #ECE7DB;border-radius:12px;">
+                    <tr>
+                      <td style="padding:14px;">
+                        <h3 style="margin:0 0 8px 0;font:italic 600 18px/1.25 Georgia,'Times New Roman',Times,serif;color:#6A8F3F;">
+                          Tip of the month
+                        </h3>
+                        <p style="margin:0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#2E3A26;">
+                          Keep CTAs above the fold and repeat them at the end for scannability.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td align="center" style="padding:10px 20px 20px 20px;">
+            <p style="margin:0 0 8px 0;font:12.5px/1.6 Arial,Helvetica,sans-serif;color:#7B806F;">
+              You are receiving this because you subscribed to our newsletter.
+            </p>
+            <p style="margin:0;font:12.5px/1.6 Arial,Helvetica,sans-serif;">
+              <a href="{{unsubscribe_url}}" style="color:#A68741;text-decoration:underline;">Unsubscribe</a>
+              &nbsp;·&nbsp;
+              <a href="https://rebhan.duckdns.org" style="color:#A68741;text-decoration:underline;">Website</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+      <!--[if mso]></td></tr></table><![endif]-->
+    </td>
+  </tr>
+</table>`;
+                const el = document.getElementById('issueHTML');
+                if (el && (!el.value || el.value.trim() === '<h1>Hello!</h1><p>This is a test HTML body.</p>')) {
+                    el.value = emailHtml;
+                }
+            })();
+
+        })();
+    </script>
 </body>
+
 </html>
