@@ -4,6 +4,10 @@ setup*.md
 Caddyfile
 backend/
 functions/
+paypal/
+email/
+
+
 
 
 
