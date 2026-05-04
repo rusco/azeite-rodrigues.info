@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azeite Rodrigues – Olivenöl aus Portugal</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Georgia", "Times New Roman", serif;
+        color: #2f2a22;
+        background: 
+            linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+            url("tree.jpg") no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .box {
+        background: #f9f6f0;
+        max-width: 760px;
+        width: 92%;
+        padding: 45px;
+        border-radius: 14px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 2.2rem;
+        color: #5b6f3b;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        font-style: italic;
+        color: #7b6f52;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 18px;
+    }
+
+    .countdown {
+        margin: 30px 0;
+        font-size: 1.4rem;
+        padding: 18px;
+        background: #ede7da;
+        border-radius: 10px;
+        border: 1px solid #d6cfbf;
+        color: #5b6f3b;
+        font-weight: bold;
+    }
+
+    .contact {
+        margin-top: 30px;
+        font-size: 1rem;
+    }
+
+    .contact a {
+        color: #5b6f3b;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .contact a:hover {
+        text-decoration: underline;
+    }
+
+    footer {
+        margin-top: 35px;
+        font-size: 0.9rem;
+        color: #7a7468;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Azeite Rodrigues</h1>
+    <div class="subtitle">Traditionelles Olivenöl aus Portugal</div>
+
+    <p><strong>Liebe Kundinnen, Kunden und Liebhaber unseres Olivenöls,</strong></p>
+
+    <p>
+        derzeit befindet sich die Ernte des Winters <strong>2025/26</strong> im Olivenöl Lagertank der   
+        <strong>Genossenschaft Macedo de Cavaleiros, Trás-os-Montes, Portugal.</strong>
+    </p>
+
+    <p>
+        Ab <strong>Anfang Mai</strong> beginnen wir mit den Planungen für unseren
+        jährlichen Versand nach Deutschland. 
+    </p>
+
+    <div class="countdown" id="countdown">
+        Countdown wird geladen …
+    </div>
+
+    <div class="contact">
+        Kontakt:  
+        <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info">
+            beatriz.rodrigues@azeite-rodrigues.info
+        </a>
+    </div>
+
+    <footer>
+        Bitte schauen Sie wieder bei uns vorbei ab dem <strong>02. Mai 2026</strong>.  
+        <br>
+        Herzlichen Dank für Ihr Interesse und Ihre Geduld.
+    </footer>
+</div>
+
+<script>
+    function updateCountdown() {
+        const targetDate = new Date("2026-05-02T00:00:00");
+        const now = new Date();
+        const diff = targetDate - now;
+
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        const el = document.getElementById("countdown");
+
+        if (days > 0) {
+            el.textContent = "Noch " + days + " Tage bis zum Start des Versands";
+        } else {
+            el.textContent = "Der Versand hat begonnen – willkommen zurück!";
+        }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000 * 60 * 60);
+</script>
+
+</body>
+</html>

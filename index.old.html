@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Azeite Rodrigues – Natives Olivenöl extra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --green: #5b6f4a;
+            --dark: #2f3a2b;
+            --light: #f6f6f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: var(--light);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--dark);
+            margin-top: 0;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        /* HERO */
+        .hero {
+            background: url("images/hero.jpg") center/cover no-repeat;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+        /* SECTIONS */
+        section {
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        /* MAP */
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 6px;
+        }
+
+        /* FORM */
+        form {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 20px;
+            background: var(--green);
+            color: white;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4a5d3e;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #d8e4c8;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .two-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Azeite Rodrigues</h1>
+            <p>Eines der besten Olivenöle Portugals – direkt vom Produzenten</p>
+        </div>
+    </header>
+
+    <!-- INTRO -->
+    <section>
+        <div class="container">
+            <h2>Natives Olivenöl extra</h2>
+            <p>
+                **Azeite Virgem Extra** – Olivenöl der höchsten Qualitätsstufe aus dem Nordosten Portugals,
+                Region <strong>Trás‑os‑Montes</strong>, mit geschützter Ursprungsbezeichnung.
+            </p>
+        </div>
+    </section>
+
+    <!-- Herkunft + Map -->
+    <section>
+        <div class="container two-cols">
+            <div>
+                <h2>Herkunft</h2>
+                <p>
+                    Ala – Macedo de Cavaleiros – Portugal<br>
+                    Biologischer Anbau, ohne Pestizide.
+                </p>
+            </div>
+
+            <div>
+                <iframe src="https://www.google.com/maps?q=Ala%20Macedo%20de%20Cavaleiros&output=embed" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <section>
+        <div class="container">
+            <h2>Impessionen aus Ala, Macedo de Cavaleiros</h2>
+
+            <div class="gallery">
+                <img src="images/olive.jpeg" alt="Oliven am Baum">
+                <img src="images/olivenhain.jpeg" alt="Olivenhain">
+                <img src="images/harvest.jpeg" alt="Ernte">
+                <img src="images/landscape.jpeg" alt="Trás-os-Montes Landschaft">
+                <img src="images/lese.jpeg" alt="Olivenlese">
+                <img src="images/trees.jpeg" alt="Olivenbäume">
+                <img src="images/ala.jpeg" alt="Ala">
+                <img src="images/dog.jpeg" alt="Familienmitglied">
+            </div>
+        </div>
+    </section>
+
+    <!-- Geschichte -->
+    <section>
+        <div class="container">
+            <h2>Unsere Geschichte & Philosophie</h2>
+            <p>
+                Seit <strong>1999</strong> versenden wir unser Olivenöl direkt an Familien
+                und Stammkunden in Deutschland. Heute gehen rund <strong>80 % der Ernte in den Export</strong>.
+            </p>
+            <ul>
+                <li>Höchste Qualität zu fairem Preis</li>
+                <li>Keine teuren Designflaschen – der Inhalt zählt</li>
+                <li>Pop‑up‑Versand einmal pro Jahr zur Kostenreduktion</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Bestellung -->
+    <section>
+        <div class="container">
+            <h2>Unverbindliche Vorbestellung – Lieferung 2026</h2>
+
+            <form action="mailto:beatriz.rodrigues@azeite-rodrigues.info" method="post" enctype="text/plain">
+                <label>Name</label>
+                <input type="text" name="Name" required>
+
+                <label>E‑Mail</label>
+                <input type="email" name="Email" required>
+
+                <label>Menge (5‑Liter‑Kanister)</label>
+                <select name="Menge">
+                    <option>1 Kanister (5 Liter)</option>
+                    <option>2 Kanister (10 Liter)</option>
+                    <option>3 Kanister (15 Liter)</option>
+                    <option>4 Kanister (20 Liter)</option>
+                    <option>5 Kanister (25 Liter)</option>
+                    <option>6 Kanister (30 Liter)</option>
+                    <option>7 Kanister (35 Liter)</option>
+                    <option>8 Kanister (40 Liter)</option>
+                    <option>9 Kanister (45 Liter)</option>
+                    <option>10 Kanister (50 Liter)</option>
+                    <option>11 Kanister (55 Liter)</option>
+                    <option>12 Kanister (60 Liter)</option>
+                    <option>13 Kanister (65 Liter)</option>
+                    <option>14 Kanister (70 Liter)</option>
+                    <option>15 Kanister (75 Liter)</option>
+                    <option>16 Kanister (80 Liter)</option>
+                    <option>17 Kanister (85 Liter)</option>
+                    <option>18 Kanister (90 Liter)</option>
+                    <option>19 Kanister (95 Liter)</option>
+                    <option>20 Kanister (100 Liter)</option>
+                    <option>+20 Kanister (bitte Kontakt aufnehmen)</option>
+                </select>
+
+                <label>Nachricht / Lieferadresse</label>
+                <textarea name="Nachricht" rows="5"></textarea>
+
+                <button type="submit">Vorbestellung senden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <strong>Impressum</strong><br>
+            Azeite Beatriz Rodrigues<br>
+            Rua do Outão 10B<br>
+            5340‑011 Ala, Macedo de Cavaleiros<br>
+            Portugal<br><br>
+            ✉ <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info">
+                beatriz.rodrigues@azeite-rodrigues.info
+            </a>
+        </div>
+    </footer>
+
+</body>
+
+</html>

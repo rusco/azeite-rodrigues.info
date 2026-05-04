@@ -1,144 +1,1289 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Azeite Rodrigues – Olivenöl aus Portugal</title>
+    <meta charset="UTF-8">
+    <title>Azeite Rodrigues – Natives Olivenöl extra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c8a84b;
+            --gold-light: #e8d08a;
+            --gold-pale: #faf5e4;
+            --olive: #4a5e2f;
+            --olive-deep: #2d3b1c;
+            --olive-mid: #6b7f48;
+            --olive-pale: #e8edd8;
+            --cream: #fdfbf5;
+            --warm-dark: #1e1a10;
+            --text: #3a3520;
+            --text-muted: #7a7055;
+        }
 
-<style>
-    body {
-        margin: 0;
-        font-family: "Georgia", "Times New Roman", serif;
-        color: #2f2a22;
-        background: 
-            linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-            url("tree.jpg") no-repeat center center fixed;
-        background-size: cover;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .box {
-        background: #f9f6f0;
-        max-width: 760px;
-        width: 92%;
-        padding: 45px;
-        border-radius: 14px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        text-align: center;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    h1 {
-        margin-top: 0;
-        font-size: 2.2rem;
-        color: #5b6f3b;
-        letter-spacing: 1px;
-    }
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
 
-    .subtitle {
-        font-style: italic;
-        color: #7b6f52;
-        margin-bottom: 30px;
-    }
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
 
-    p {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        margin-bottom: 18px;
-    }
+        /* ── HERO ─────────────────────────────────── */
+        .hero {
+            min-height: 100svh;
+            background:
+                radial-gradient(ellipse at 30% 60%, rgba(100, 120, 50, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(200, 168, 75, 0.2) 0%, transparent 50%),
+                linear-gradient(160deg, #1e2810 0%, #2d3b1c 40%, #3a4e22 70%, #4a5e2f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .countdown {
-        margin: 30px 0;
-        font-size: 1.4rem;
-        padding: 18px;
-        background: #ede7da;
-        border-radius: 10px;
-        border: 1px solid #d6cfbf;
-        color: #5b6f3b;
-        font-weight: bold;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 85%, rgba(200, 168, 75, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 15%, rgba(200, 168, 75, 0.08) 0%, transparent 35%);
+            pointer-events: none;
+        }
 
-    .contact {
-        margin-top: 30px;
-        font-size: 1rem;
-    }
+        /* decorative olive shapes */
+        .hero-deco {
+            position: absolute;
+            /* olive shape: tall ellipse with asymmetric rounding, slightly rotated */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            border: 1px solid rgba(200, 168, 75, 0.18);
+            pointer-events: none;
+        }
 
-    .contact a {
-        color: #5b6f3b;
-        text-decoration: none;
-        font-weight: bold;
-    }
+        .hero-deco.d1 {
+            width: 280px;
+            height: 420px;
+            top: -100px;
+            right: -60px;
+            transform: rotate(22deg);
+            border-color: rgba(200, 168, 75, 0.15);
+        }
 
-    .contact a:hover {
-        text-decoration: underline;
-    }
+        .hero-deco.d1::after {
+            content: '';
+            position: absolute;
+            inset: 18px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            border: 1px solid rgba(200, 168, 75, 0.08);
+        }
 
-    footer {
-        margin-top: 35px;
-        font-size: 0.9rem;
-        color: #7a7468;
-    }
-</style>
+        .hero-deco.d2 {
+            width: 180px;
+            height: 270px;
+            bottom: -40px;
+            left: -50px;
+            transform: rotate(-15deg);
+            border-color: rgba(200, 168, 75, 0.1);
+        }
+
+        .hero-deco.d3 {
+            width: 90px;
+            height: 136px;
+            bottom: 90px;
+            right: 80px;
+            transform: rotate(35deg);
+            border-color: rgba(200, 168, 75, 0.22);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(200, 168, 75, 0.5);
+            color: var(--gold-light);
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 2px;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 8vw, 5.5rem);
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-sub {
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            margin-bottom: 48px;
+            max-width: 560px;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #a8883a 100%);
+            color: var(--warm-dark);
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 14px 36px;
+            border-radius: 2px;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 24px rgba(200, 168, 75, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(200, 168, 75, 0.4);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            animation: fadeUp 0.8s 1.2s forwards;
+        }
+
+        .hero-scroll span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(200, 168, 75, 0.6), transparent);
+            animation: scrollPulse 2s 1.5s infinite;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ── SECTION BASE ────────────────────────── */
+        section {
+            padding: 80px 24px;
+        }
+
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--olive-deep);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold), transparent);
+            margin: 20px 0 32px;
+        }
+
+        /* ── INTRO STRIP ─────────────────────────── */
+        .intro-strip {
+            background: var(--olive-deep);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .intro-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-top: 1px solid rgba(200, 168, 75, 0.2);
+            border-bottom: 1px solid rgba(200, 168, 75, 0.2);
+        }
+
+        .intro-item {
+            padding: 36px 32px;
+            border-right: 1px solid rgba(200, 168, 75, 0.12);
+            position: relative;
+        }
+
+        .intro-item:last-child {
+            border-right: none;
+        }
+
+        .intro-item-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--gold);
+        }
+
+        .intro-item h3 {
+            font-size: 0.8rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+
+        .intro-item p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.6;
+        }
+
+        /* ── ORIGIN SECTION ──────────────────────── */
+        .origin-section {
+            background: var(--cream);
+        }
+
+        .origin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .origin-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .origin-text strong {
+            color: var(--olive);
+            font-weight: 700;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .tag {
+            border: 1px solid var(--olive-mid);
+            color: var(--olive);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 2px;
+        }
+
+        .map-wrap {
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 12px 48px rgba(45, 59, 28, 0.15);
+            border: 1px solid var(--olive-pale);
+            aspect-ratio: 1;
+            position: relative;
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* ── GALLERY ─────────────────────────────── */
+        .gallery-section {
+            background: linear-gradient(180deg, var(--olive-deep) 0%, #1a2510 100%);
+            padding: 80px 24px;
+        }
+
+        .gallery-section .section-title {
+            color: #fff;
+        }
+
+        .gallery-section .section-label {
+            color: var(--gold-light);
+        }
+
+        .gallery-section .divider {
+            background: linear-gradient(to right, var(--gold-light), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .gallery-grid .g-item {
+            overflow: hidden;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            aspect-ratio: 1;
+            position: relative;
+        }
+
+        .gallery-grid .g-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-grid .g-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+
+        .gallery-grid .g-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .gallery-grid .g-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(200, 168, 75, 0.3);
+            font-size: 2rem;
+        }
+
+        /* ── HISTORY SECTION ─────────────────────── */
+        .history-section {
+            background: var(--gold-pale);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-section::before {
+            content: '"';
+            position: absolute;
+            top: -40px;
+            left: -20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 30rem;
+            color: rgba(200, 168, 75, 0.07);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .history-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            position: relative;
+        }
+
+        .history-text h2 {
+            color: var(--olive-deep);
+        }
+
+        .history-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--olive);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .philosophy-box {
+            background: var(--olive-deep);
+            border-radius: 4px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 0 4px 0 50%;
+            background: rgba(200, 168, 75, 0.08);
+        }
+
+        .philosophy-box h3 {
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+
+        .philosophy-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .philosophy-box ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.93rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .philosophy-box ul li::before {
+            content: '';
+            display: block;
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #a8883a);
+            margin-top: 2px;
+        }
+
+        /* ── ORDER SECTION ───────────────────────── */
+        .order-section {
+            background: var(--cream);
+        }
+
+        .order-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .order-info h2 {
+            color: var(--olive-deep);
+        }
+
+        .order-info p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .timeline {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 24px;
+            position: relative;
+        }
+
+        .tl-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .tl-dot-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 28px;
+            min-width: 28px;
+        }
+
+        .tl-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            margin-top: 5px;
+        }
+
+        .tl-line {
+            flex: 1;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--gold), var(--olive-pale));
+            margin-top: 4px;
+        }
+
+        .tl-item:last-child .tl-line {
+            display: none;
+        }
+
+        .tl-content h4 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .tl-content p {
+            font-size: 0.93rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* FORM */
+        .form-card {
+            background: #fff;
+            border-radius: 6px;
+            padding: 36px;
+            box-shadow: 0 4px 32px rgba(45, 59, 28, 0.08);
+            border: 1px solid var(--olive-pale);
+        }
+
+        .form-card h3 {
+            font-size: 1.4rem;
+            color: var(--olive-deep);
+            margin-bottom: 6px;
+        }
+
+        .form-card .form-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text);
+            background: #fafaf8;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--olive-mid);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--olive) 0%, var(--olive-deep) 100%);
+            color: #fff;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(45, 59, 28, 0.2);
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* ── NEWSLETTER BANNER ───────────────────── */
+        .newsletter-banner {
+            background: linear-gradient(135deg, var(--gold) 0%, #a8883a 50%, #8a6e28 100%);
+            padding: 56px 24px;
+            text-align: center;
+        }
+
+        .newsletter-banner h2 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: var(--warm-dark);
+            margin-bottom: 10px;
+        }
+
+        .newsletter-banner p {
+            font-size: 1rem;
+            color: rgba(30, 26, 16, 0.7);
+            margin-bottom: 28px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 160px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 3px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text);
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 12px 22px;
+            background: var(--warm-dark);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s, opacity 0.2s;
+        }
+
+        .newsletter-form button:hover {
+            background: #0a0800;
+        }
+
+        .newsletter-form button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        #nl-msg.success {
+            color: var(--warm-dark);
+        }
+
+        #nl-msg.error {
+            color: #8b1a1a;
+        }
+
+        /* ── FOOTER ──────────────────────────────── */
+        footer {
+            background: var(--olive-deep);
+            padding: 56px 24px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        .footer-inner {
+            max-width: 1060px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h2 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-contact h3 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .footer-contact address {
+            font-style: normal;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .footer-contact a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.25);
+            text-align: center;
+        }
+
+        /* ── RESPONSIVE ──────────────────────────── */
+        @media (max-width: 760px) {
+            .intro-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(200, 168, 75, 0.12);
+            }
+
+            .intro-item:last-child {
+                border-bottom: none;
+            }
+
+            .origin-grid,
+            .history-inner,
+            .order-grid,
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-grid .g-item.tall {
+                grid-row: span 1;
+                aspect-ratio: 1;
+            }
+
+            .gallery-grid .g-item.wide {
+                grid-column: span 2;
+            }
+
+            .stat-row {
+                gap: 24px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .map-wrap {
+                aspect-ratio: 4/3;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="box">
-    <h1>Azeite Rodrigues</h1>
-    <div class="subtitle">Traditionelles Olivenöl aus Portugal</div>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-deco d1"></div>
+        <div class="hero-deco d2"></div>
+        <div class="hero-deco d3"></div>
+        <span class="hero-badge">Direkt vom Produzenten · Portugal</span>
+        <h1>Azeite <em>Rodrigues</em></h1>
+        <p class="hero-sub">Natives Olivenöl extra der höchsten Qualitätsstufe –<br>aus dem Herzen von Trás-os-Montes
+        </p>
+        <a href="#bestellen" class="hero-cta">Jetzt vorbestellen</a>
+        <div class="hero-scroll">
+            <span>Mehr erfahren</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
 
-    <p><strong>Liebe Kundinnen, Kunden und Liebhaber unseres Olivenöls,</strong></p>
-
-    <p>
-        derzeit befindet sich die Ernte des Winters <strong>2025/26</strong> im Olivenöl Lagertank der   
-        <strong>Genossenschaft Macedo de Cavaleiros, Trás-os-Montes, Portugal.</strong>.
-    </p>
-
-    <p>
-        Ab <strong>Anfang Mai</strong> beginnen wir mit den Planungen für unseren
-        jährlichen Versand nach Deutschland. 
-    </p>
-
-    <div class="countdown" id="countdown">
-        Countdown wird geladen …
+    <!-- INTRO STRIP -->
+    <div class="intro-strip">
+        <div class="intro-inner">
+            <div class="intro-item">
+                <span class="intro-item-icon">⬡</span>
+                <h3>Azeite Virgem Extra</h3>
+                <p>Höchste Qualitätsstufe, geschützte Ursprungsbezeichnung aus Trás-os-Montes</p>
+            </div>
+            <div class="intro-item">
+                <span class="intro-item-icon">⬡</span>
+                <h3>Biologischer Anbau</h3>
+                <p>100% biologisch, ohne Pestizide, naturnah und nachhaltig produziert</p>
+            </div>
+            <div class="intro-item">
+                <span class="intro-item-icon">⬡</span>
+                <h3>Direktversand</h3>
+                <p>Seit 1999 direkt an Familien in Deutschland – ohne teure Zwischenhändler</p>
+            </div>
+        </div>
     </div>
 
-    <div class="contact">
-        Kontakt:  
-        <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info">
-            beatriz.rodrigues@azeite-rodrigues.info
-        </a>
+    <!-- ORIGIN -->
+    <section class="origin-section">
+        <div class="container origin-grid">
+            <div class="origin-text">
+                <span class="section-label">Herkunft</span>
+                <h2 class="section-title">Ala, Macedo de Cavaleiros</h2>
+                <div class="divider"></div>
+                <p>
+                    Unser Olivenöl stammt aus dem <strong>Nordosten Portugals</strong>, aus dem kleinen Ort Ala in der
+                    Gemeinde Macedo de Cavaleiros. Die Region <strong>Trás-os-Montes</strong> ist bekannt für ihre
+                    außergewöhnliche Qualität und trägt eine <strong>geschützte Ursprungsbezeichnung</strong>.
+                </p>
+                <p>
+                    Die Oliven werden <strong>biologisch angebaut</strong> – ganz ohne Pestizide. Das milde Klima, die
+                    alten Olivenbäume und die sorgfältige Ernte von Hand geben unserem Öl seinen unverwechselbaren
+                    Charakter.
+                </p>
+                <div class="tag-row">
+                    <span class="tag">DOP Trás-os-Montes</span>
+                    <span class="tag">Bio-Anbau</span>
+                    <span class="tag">Nordostportugal</span>
+                    <span class="tag">5 L Kanister</span>
+                </div>
+            </div>
+            <div class="map-wrap">
+                <iframe src="https://maps.google.com/maps?q=Ala+Macedo+de+Cavaleiros+Portugal&output=embed"
+                    loading="lazy" title="Karte: Ala, Macedo de Cavaleiros">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section">
+        <div class="container">
+            <span class="section-label">Impressionen</span>
+            <h2 class="section-title">Aus Ala, Macedo de Cavaleiros</h2>
+            <div class="divider"></div>
+            <div class="gallery-grid">
+                <div class="g-item tall">
+                    <img src="images/olive.jpeg" alt="Oliven am Baum"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🫒</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/olivenhain.jpeg" alt="Olivenhain"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🌿</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/harvest.jpeg" alt="Ernte"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🌾</div>'">
+                </div>
+                <div class="g-item wide">
+                    <img src="images/landscape.jpeg" alt="Trás-os-Montes Landschaft"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🏔</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/lese.jpeg" alt="Olivenlese"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🫒</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/trees.jpeg" alt="Olivenbäume"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🌳</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/ala.jpeg" alt="Ala"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🏘</div>'">
+                </div>
+                <div class="g-item">
+                    <img src="images/dog.jpeg" alt="Familienmitglied"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'>🐾</div>'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORY / PHILOSOPHY -->
+    <section class="history-section">
+        <div class="container history-inner">
+            <div class="history-text">
+                <span class="section-label">Unsere Geschichte</span>
+                <h2 class="section-title">Seit 1999 mit Leidenschaft</h2>
+                <div class="divider"></div>
+                <p>
+                    Alles begann damit, dass wir unser Olivenöl an Familie, Verwandte und Freunde in Deutschland
+                    versendeten. Was als persönliches Projekt startete, ist heute ein fester Teil unserer Ernte
+                    geworden.
+                </p>
+                <p>
+                    Mittlerweile geht fast <strong>80 % unserer gesamten Ernte in den Export</strong>. Die Philosophie
+                    dahinter haben wir seitdem beibehalten: höchste Qualität zu fairem Preis – direkt und ohne Umwege.
+                </p>
+                <p>
+                    Bei dunkler und kühler Lagerung ist unser Olivenöl ohne Probleme <strong>mindestens 2 Jahre</strong>
+                    ohne Qualitäts- oder Geschmacksverlust haltbar.
+                </p>
+                <div class="stat-row">
+                    <div class="stat">
+                        <span class="stat-num">1999</span>
+                        <span class="stat-label">Gegründet</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">80%</span>
+                        <span class="stat-label">Exportanteil</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">25+</span>
+                        <span class="stat-label">Jahre Erfahrung</span>
+                    </div>
+                </div>
+            </div>
+            <div class="philosophy-box">
+                <h3>Unsere Philosophie</h3>
+                <ul>
+                    <li>Qualitativ hochwertiges Olivenöl zu niedrigem Preis – der Inhalt zählt, nicht das Marketing</li>
+                    <li>Keine teuren Designflaschen oder aufwendigen Etiketten – das Geld gehört in das Öl</li>
+                    <li>Minimierung der Versandkosten durch einmaligen <strong
+                            style="color:var(--gold-light)">Pop-up-Versand pro Jahr</strong></li>
+                    <li>5-Liter-Kanister in lebensmittelzertifiziertem Kunststoff – praktisch und kosteneffizient</li>
+                    <li>Direkter Kontakt: wir sind immer für unsere Kunden erreichbar</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORDER -->
+    <section class="order-section" id="bestellen">
+        <div class="container order-grid">
+            <div class="order-info">
+                <span class="section-label">Lieferung 2026</span>
+                <h2 class="section-title">Vorbestellung</h2>
+                <div class="divider"></div>
+                <p>
+                    Die Lieferung 2026 ist in Planung. Schauen Sie im Laufe des Mai öfters vorbei oder abonnieren Sie
+                    unseren Newsletter – wir informieren Sie, sobald es losgeht.
+                </p>
+                <p>
+                    Wir sind auch unter <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info"
+                        style="color:var(--olive);font-weight:700">beatriz.rodrigues@azeite-rodrigues.info</a> jederzeit
+                    erreichbar.
+                </p>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-dot-wrap">
+                            <div class="tl-dot"></div>
+                            <div class="tl-line"></div>
+                        </div>
+                        <div class="tl-content">
+                            <h4>Mitte bis Ende Mai</h4>
+                            <p>Preis steht fest – wir beginnen, Bestellungen zu sammeln</p>
+                        </div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot-wrap">
+                            <div class="tl-dot"></div>
+                            <div class="tl-line"></div>
+                        </div>
+                        <div class="tl-content">
+                            <h4>Anfang Juni</h4>
+                            <p>Unser Transport macht sich auf die Reise nach Deutschland</p>
+                        </div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot-wrap">
+                            <div class="tl-dot"></div>
+                        </div>
+                        <div class="tl-content">
+                            <h4>Lieferung</h4>
+                            <p>Ihr Olivenöl kommt frisch von der Ernte direkt zu Ihnen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-card">
+                <h3>Unverbindliche Vorbestellung</h3>
+                <p class="form-sub">Wir melden uns mit dem genauen Preis und Details im Mai.</p>
+                <form action="mailto:beatriz.rodrigues@azeite-rodrigues.info" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="Name" placeholder="Ihr vollständiger Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" name="Email" placeholder="ihre@email.de" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Menge (5-Liter-Kanister)</label>
+                        <select name="Menge">
+                            <option value="">Bitte wählen …</option>
+                            <option>1 Kanister (5 Liter)</option>
+                            <option>2 Kanister (10 Liter)</option>
+                            <option>3 Kanister (15 Liter)</option>
+                            <option>4 Kanister (20 Liter)</option>
+                            <option>5 Kanister (25 Liter)</option>
+                            <option>6 Kanister (30 Liter)</option>
+                            <option>7 Kanister (35 Liter)</option>
+                            <option>8 Kanister (40 Liter)</option>
+                            <option>9 Kanister (45 Liter)</option>
+                            <option>10 Kanister (50 Liter)</option>
+                            <option>+10 Kanister (bitte Kontakt aufnehmen)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Lieferadresse / Nachricht</label>
+                        <textarea name="Nachricht"
+                            placeholder="Ihre Lieferadresse oder weitere Anmerkungen …"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Vorbestellung absenden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER BANNER -->
+    <div class="newsletter-banner">
+        <div class="container" style="text-align:center">
+            <h2>Auf dem Laufenden bleiben</h2>
+            <p>Erfahren Sie als Erste(r) von unserem Versandtermin und dem aktuellen Preis.</p>
+
+            <div id="nl-form-wrap">
+                <div class="newsletter-form" id="nl-form">
+                    <input type="text" id="nl-name" placeholder="Ihr Name (optional)" autocomplete="name">
+                    <input type="email" id="nl-email" placeholder="Ihre E-Mail-Adresse" required autocomplete="email">
+                    <button type="button" id="nl-submit">Abonnieren</button>
+                </div>
+                <div id="nl-msg" style="display:none; margin-top:14px; font-size:0.92rem; font-weight:700;"></div>
+            </div>
+        </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        Bitte schauen Sie wieder bei uns vorbei ab dem <strong>02. Mai 2026</strong>.  
-        <br>
-        Herzlichen Dank für Ihr Interesse und Ihre Geduld.
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h2>Azeite Rodrigues</h2>
+                <p>Natives Olivenöl extra aus Trás-os-Montes – direkt vom Produzenten zu Ihnen nach Hause.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Impressum</h3>
+                <address>
+                    Azeite Beatriz Rodrigues<br>
+                    Rua do Outão 10B<br>
+                    5340-011 Ala, Macedo de Cavaleiros<br>
+                    Portugal<br><br>
+                    <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info">beatriz.rodrigues@azeite-rodrigues.info</a>
+                </address>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Azeite Beatriz Rodrigues · Alle Rechte vorbehalten
+        </div>
     </footer>
-</div>
 
-<script>
-    function updateCountdown() {
-        const targetDate = new Date("2026-05-02T00:00:00");
-        const now = new Date();
-        const diff = targetDate - now;
+    <script>
+        (function () {
+            var API = 'https://api.azeite-rodrigues.info';
+            var btn = document.getElementById('nl-submit');
+            var emailEl = document.getElementById('nl-email');
+            var nameEl = document.getElementById('nl-name');
+            var msg = document.getElementById('nl-msg');
+            var form = document.getElementById('nl-form');
+            if (!btn) return;
 
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            function showMsg(text, type) {
+                msg.textContent = text;
+                msg.className = type;
+                msg.style.display = 'block';
+            }
 
-        const el = document.getElementById("countdown");
+            function doSubscribe() {
+                var e = emailEl.value.trim();
+                var n = nameEl.value.trim();
+                if (!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+                    showMsg('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
+                    emailEl.focus();
+                    return;
+                }
+                btn.disabled = true;
+                btn.textContent = 'Wird gesendet …';
+                msg.style.display = 'none';
+                var payload = { email: e };
+                if (n) payload.name = n;
+                fetch(API + '/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(function (res) {
+                    if (res.ok) {
+                        form.style.display = 'none';
+                        showMsg('✓ Vielen Dank! Bitte bestätigen Sie Ihre Anmeldung – wir haben Ihnen eine Bestätigungsmail geschickt.', 'success');
+                    } else if (res.status === 409) {
+                        showMsg('Diese E-Mail-Adresse ist bereits registriert.', 'error');
+                        btn.disabled = false; btn.textContent = 'Abonnieren';
+                    } else {
+                        res.text().then(function (body) {
+                            showMsg('Fehler: ' + (body || res.status), 'error');
+                            btn.disabled = false; btn.textContent = 'Abonnieren';
+                        });
+                    }
+                }).catch(function () {
+                    showMsg('Verbindungsfehler – bitte später erneut versuchen.', 'error');
+                    btn.disabled = false; btn.textContent = 'Abonnieren';
+                });
+            }
 
-        if (days > 0) {
-            el.textContent = "Noch " + days + " Tage bis zum Start des Versands";
-        } else {
-            el.textContent = "Der Versand hat begonnen – willkommen zurück!";
-        }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60);
-</script>
+            btn.addEventListener('click', doSubscribe);
+            [emailEl, nameEl].forEach(function (el) {
+                el.addEventListener('keydown', function (e) { if (e.key === 'Enter') doSubscribe(); });
+            });
+        })();
+    </script>
 
 </body>
+
 </html>
