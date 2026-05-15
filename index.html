@@ -66,6 +66,27 @@
             overflow: hidden;
         }
 
+        /* Option B: olive.jpeg als Hintergrundbild, sehr subtil */
+        .hero-bg-photo {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/olive.jpeg');
+            background-size: cover;
+            background-position: center 40%;
+            opacity: 0;
+            animation: heroBgFade 2.2s 0.1s ease-out forwards;
+            pointer-events: none;
+            /* dunkle Überblendung damit Text lesbar bleibt */
+            mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+            mix-blend-mode: luminosity;
+        }
+
+        @keyframes heroBgFade {
+            from { opacity: 0; }
+            to   { opacity: 0.38; }
+        }
+
         .hero::before {
             content: '';
             position: absolute;
@@ -74,14 +95,16 @@
                 radial-gradient(circle at 15% 85%, rgba(200, 168, 75, 0.12) 0%, transparent 40%),
                 radial-gradient(circle at 85% 15%, rgba(200, 168, 75, 0.08) 0%, transparent 35%);
             pointer-events: none;
+            z-index: 1;
         }
 
-        /* decorative olive shapes */
+        /* decorative olive shapes – jetzt z-index 1 */
         .hero-deco {
             position: absolute;
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             border: 1px solid rgba(200, 168, 75, 0.18);
             pointer-events: none;
+            z-index: 1;
         }
 
         .hero-deco.d1 {
@@ -117,6 +140,16 @@
             right: 80px;
             transform: rotate(35deg);
             border-color: rgba(200, 168, 75, 0.22);
+        }
+
+        /* hero content sits above branch and bg photo */
+        .hero-badge,
+        .hero h1,
+        .hero-sub,
+        .hero-cta,
+        .hero-scroll {
+            position: relative;
+            z-index: 2;
         }
 
         .hero-badge {
@@ -987,9 +1020,13 @@
 
     <!-- HERO -->
     <header class="hero">
+        <!-- Option B: Hintergrundfoto olive.jpeg, subtil eingeblendet -->
+        <div class="hero-bg-photo" aria-hidden="true"></div>
+
         <div class="hero-deco d1"></div>
         <div class="hero-deco d2"></div>
         <div class="hero-deco d3"></div>
+
         <span class="hero-badge">Direkt vom Produzenten · Portugal</span>
         <h1>Azeite <em>Rodrigues</em></h1>
         <!-- FIX 8: <br> entfernt – kein erzwungener Zeilenumbruch auf Mobile -->
