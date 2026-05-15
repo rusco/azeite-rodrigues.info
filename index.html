@@ -79,7 +79,6 @@
         /* decorative olive shapes */
         .hero-deco {
             position: absolute;
-            /* olive shape: tall ellipse with asymmetric rounding, slightly rotated */
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             border: 1px solid rgba(200, 168, 75, 0.18);
             pointer-events: none;
@@ -136,8 +135,9 @@
             animation: fadeUp 0.8s 0.2s forwards;
         }
 
+        /* FIX 1: Hero h1 Schriftgröße auf Mobile reduziert (2.6rem → 2rem) */
         .hero h1 {
-            font-size: clamp(2.6rem, 8vw, 5.5rem);
+            font-size: clamp(2rem, 7vw, 5.5rem);
             color: #fff;
             line-height: 1.1;
             letter-spacing: -0.01em;
@@ -152,12 +152,14 @@
         }
 
         .hero-sub {
-            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
             color: rgba(255, 255, 255, 0.7);
             font-weight: 300;
             letter-spacing: 0.04em;
             margin-bottom: 48px;
             max-width: 560px;
+            /* FIX 2: padding sicherheitshalber hinzugefügt damit kein overflow */
+            padding: 0 8px;
             opacity: 0;
             animation: fadeUp 0.8s 0.6s forwards;
         }
@@ -349,6 +351,7 @@
             margin-top: 24px;
         }
 
+        /* FIX 3: Tags bekommen max-width 100% damit kein overflow */
         .tag {
             border: 1px solid var(--olive-mid);
             color: var(--olive);
@@ -358,6 +361,8 @@
             text-transform: uppercase;
             padding: 5px 14px;
             border-radius: 2px;
+            max-width: 100%;
+            word-break: break-word;
         }
 
         .map-wrap {
@@ -485,6 +490,7 @@
             display: flex;
             gap: 32px;
             margin-top: 32px;
+            flex-wrap: wrap;
         }
 
         .stat {
@@ -664,6 +670,18 @@
             font-size: 0.88rem;
             color: var(--text-muted);
             margin-bottom: 24px;
+        }
+
+        /* FIX 4: Hinweisbox für Mailto-Formular */
+        .form-notice {
+            background: #fffbe6;
+            border: 1px solid #e8d08a;
+            border-radius: 3px;
+            padding: 10px 14px;
+            font-size: 0.83rem;
+            color: #7a5c10;
+            margin-bottom: 18px;
+            line-height: 1.5;
         }
 
         .form-group {
@@ -920,7 +938,12 @@
             }
 
             .stat-row {
-                gap: 24px;
+                gap: 20px;
+            }
+
+            /* FIX 5: stat-num auf Mobile etwas kleiner */
+            .stat-num {
+                font-size: 2.4rem;
             }
 
             .newsletter-form {
@@ -929,6 +952,32 @@
 
             .map-wrap {
                 aspect-ratio: 4/3;
+            }
+
+            /* FIX 6: Formular padding auf Mobile reduzieren */
+            .form-card {
+                padding: 24px 20px;
+            }
+
+            .philosophy-box {
+                padding: 28px 20px;
+            }
+        }
+
+        /* FIX 7: Sehr kleine Screens (320px) */
+        @media (max-width: 380px) {
+            .hero-badge {
+                font-size: 0.6rem;
+                letter-spacing: 0.12em;
+                padding: 5px 12px;
+            }
+
+            section {
+                padding: 60px 16px;
+            }
+
+            .newsletter-banner {
+                padding: 40px 16px;
             }
         }
     </style>
@@ -943,9 +992,9 @@
         <div class="hero-deco d3"></div>
         <span class="hero-badge">Direkt vom Produzenten · Portugal</span>
         <h1>Azeite <em>Rodrigues</em></h1>
-        <p class="hero-sub">Natives Olivenöl extra der höchsten Qualitätsstufe –<br>aus dem Herzen von Trás-os-Montes
-        </p>
-        <a href="#bestellen" class="hero-cta">Jetzt vorbestellen</a>
+        <!-- FIX 8: <br> entfernt – kein erzwungener Zeilenumbruch auf Mobile -->
+        <p class="hero-sub">Natives Olivenöl extra der höchsten Qualitätsstufe – aus dem Herzen von Trás-os-Montes</p>
+        <a href="#bestellen" class="hero-cta">Jetzt bestellen</a>
         <div class="hero-scroll">
             <span>Mehr erfahren</span>
             <div class="scroll-line"></div>
@@ -1101,11 +1150,12 @@
         <div class="container order-grid">
             <div class="order-info">
                 <span class="section-label">Lieferung 2026</span>
-                <h2 class="section-title">Vorbestellung</h2>
+                <h2 class="section-title">Bestellung</h2>
                 <div class="divider"></div>
                 <p>
-                    Die Lieferung 2026 ist in Planung. Schauen Sie im Laufe des Mai öfters vorbei oder abonnieren Sie
-                    unseren Newsletter – wir informieren Sie, sobald es losgeht.
+                    Die Lieferung 2026 ist in Vorbereitung. Wenn Sie interessiert sind können sie mittels Webformular
+                    bestellen.
+                    Der Preis beträgt diese Jahr 13,- €uro pro Liter (=65 €uro für den 5-Liter-Kanister)
                 </p>
                 <p>
                     Wir sind auch unter <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info"
@@ -1120,7 +1170,7 @@
                         </div>
                         <div class="tl-content">
                             <h4>Mitte bis Ende Mai</h4>
-                            <p>Preis steht fest – wir beginnen, Bestellungen zu sammeln</p>
+                            <p>Preis steht fest: 13,- €uro für 2026 – wir beginnen, Bestellungen zu sammeln</p>
                         </div>
                     </div>
                     <div class="tl-item">
@@ -1145,20 +1195,33 @@
                 </div>
             </div>
             <div class="form-card">
-                <h3>Unverbindliche Vorbestellung</h3>
-                <p class="form-sub">Wir melden uns mit dem genauen Preis und Details im Mai.</p>
+                <h3>Bestellung</h3>
+                <p class="form-sub">Wir melden uns nach Eingang Ihrer Bestellung mit allen Details.</p>
+
+                <!-- FIX 9: Hinweis auf E-Mail-Client-Abhängigkeit -->
+                <div class="form-notice">
+                    ℹ️ Das Formular öffnet Ihr E-Mail-Programm. Alternativ schreiben Sie uns direkt an
+                    <a href="mailto:beatriz.rodrigues@azeite-rodrigues.info" style="color:#7a5c10;font-weight:700">beatriz.rodrigues@azeite-rodrigues.info</a>.
+                </div>
+
                 <form action="mailto:beatriz.rodrigues@azeite-rodrigues.info" method="post" enctype="text/plain">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="Name" placeholder="Ihr vollständiger Name" required>
+                        <!-- FIX 10: id-Attribute bei allen Formularfeldern ergänzt damit label for="..." funktioniert -->
+                        <label for="name">Name</label>
+                        <input id="name" type="text" name="Name" placeholder="Ihr vollständiger Name" required>
                     </div>
                     <div class="form-group">
-                        <label>E-Mail</label>
-                        <input type="email" name="Email" placeholder="ihre@email.de" required>
+                        <label for="email">E-Mail</label>
+                        <input id="email" type="email" name="Email" placeholder="ihre@email.de" required>
                     </div>
                     <div class="form-group">
-                        <label>Menge (5-Liter-Kanister)</label>
-                        <select name="Menge">
+                        <label for="whatsapp">WhatsApp-Nummer</label>
+                        <input id="whatsapp" type="tel" name="WhatsApp" placeholder="+49 170 1234567">
+                    </div>
+                    <div class="form-group">
+                        <!-- FIX 11: label for="menge" und id="menge" stimmen jetzt überein (vorher: for="Menge" ohne id) -->
+                        <label for="menge">Menge (5-Liter-Kanister)</label>
+                        <select id="menge" name="Menge">
                             <option value="">Bitte wählen …</option>
                             <option>1 Kanister (5 Liter)</option>
                             <option>2 Kanister (10 Liter)</option>
@@ -1174,11 +1237,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Lieferadresse / Nachricht</label>
-                        <textarea name="Nachricht"
-                            placeholder="Ihre Lieferadresse oder weitere Anmerkungen …"></textarea>
+                        <label for="nachricht">Nachricht</label>
+                        <!-- FIX 12: id="nachricht" ergänzt -->
+                        <textarea id="nachricht" name="Nachricht" placeholder="Ihre Nachricht..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Vorbestellung absenden</button>
+                    <button type="submit" class="btn-submit">Bestellung absenden</button>
                 </form>
             </div>
         </div>
@@ -1188,7 +1251,7 @@
     <div class="newsletter-banner">
         <div class="container" style="text-align:center">
             <h2>Auf dem Laufenden bleiben</h2>
-            <p>Erfahren Sie als Erste(r) von unserem Versandtermin und dem aktuellen Preis.</p>
+            <p>Erfahren Sie als Erste(r) von unserem Versandtermin.</p>
 
             <div id="nl-form-wrap">
                 <div class="newsletter-form" id="nl-form">
@@ -1219,8 +1282,9 @@
                 </address>
             </div>
         </div>
+        <!-- FIX 13: Copyright-Jahr auf 2026 aktualisiert -->
         <div class="footer-bottom">
-            © 2025 Azeite Beatriz Rodrigues · Alle Rechte vorbehalten
+            © 2026 Azeite Beatriz Rodrigues · Alle Rechte vorbehalten
         </div>
     </footer>
 
