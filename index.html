@@ -75,19 +75,14 @@
             opacity: 0;
             animation: heroBgFade 2.2s 0.1s ease-out forwards;
             pointer-events: none;
-            mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 100% at 70% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
             mix-blend-mode: luminosity;
         }
 
         @keyframes heroBgFade {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.38;
-            }
+            from { opacity: 0; }
+            to   { opacity: 0.38; }
         }
 
         .hero::before {
@@ -251,7 +246,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -259,15 +253,8 @@
         }
 
         @keyframes scrollPulse {
-
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 1;
-            }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         /* ── SECTION BASE ────────────────────────── */
@@ -605,9 +592,8 @@
         /* Full-width layout for Google Form */
         .order-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
+            grid-template-columns: 1fr;
+            gap: 48px;
         }
 
         .order-info h2 {
@@ -690,42 +676,18 @@
             padding: 8px;
             box-shadow: 0 4px 32px rgba(45, 59, 28, 0.08);
             border: 1px solid var(--olive-pale);
-            /* height is set via JS to match the left column */
             overflow: hidden;
         }
 
         .gform-wrap {
             width: 100%;
-            height: 100%;
-            overflow-y: scroll;
-            overflow-x: hidden;
             border-radius: 4px;
-            /* style the scrollbar to match the site */
-            scrollbar-width: thin;
-            scrollbar-color: var(--gold) var(--olive-pale);
-        }
-
-        .gform-wrap::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .gform-wrap::-webkit-scrollbar-track {
-            background: var(--olive-pale);
-            border-radius: 3px;
-        }
-
-        .gform-wrap::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 3px;
-        }
-
-        .gform-wrap::-webkit-scrollbar-thumb:hover {
-            background: var(--gold-light);
+            overflow: hidden;
         }
 
         .gform-wrap iframe {
             width: 100%;
-            height: 1614px;
+            height: 1200px;
             border: none;
             display: block;
         }
@@ -798,13 +760,8 @@
             cursor: not-allowed;
         }
 
-        #nl-msg.success {
-            color: var(--warm-dark);
-        }
-
-        #nl-msg.error {
-            color: #8b1a1a;
-        }
+        #nl-msg.success { color: var(--warm-dark); }
+        #nl-msg.error   { color: #8b1a1a; }
 
         /* ── FOOTER ──────────────────────────────── */
         footer {
@@ -936,11 +893,6 @@
 
             .form-card {
                 padding: 4px;
-            }
-
-            .gform-wrap iframe {
-                /* Google Forms adjusts its own height; keep it tall enough */
-                height: 1700px;
             }
 
             .philosophy-box {
@@ -1184,7 +1136,10 @@
                 <div class="gform-wrap">
                     <iframe
                         src="https://docs.google.com/forms/d/e/1FAIpQLSeMPB_rDt5aVlv-YEsexCgmPed_0uG06ztKov5V8d2eQzRI5g/viewform?embedded=true"
-                        frameborder="0" marginheight="0" marginwidth="0" title="Bestellformular">Wird geladen…</iframe>
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                        title="Bestellformular">Wird geladen…</iframe>
                 </div>
             </div>
         </div>
@@ -1231,27 +1186,6 @@
     </footer>
 
     <script>
-        // Match form card height to the order-info column height
-        (function () {
-            function syncFormHeight() {
-                var info = document.querySelector('.order-info');
-                var card = document.querySelector('.form-card');
-                var wrap = document.querySelector('.gform-wrap');
-                if (!info || !card || !wrap) return;
-                if (window.innerWidth > 760) {
-                    var h = info.offsetHeight;
-                    card.style.height = h + 'px';
-                    wrap.style.height = (h - 16) + 'px';
-                } else {
-                    card.style.height = '';
-                    wrap.style.height = '1700px';
-                }
-            }
-            window.addEventListener('load', syncFormHeight);
-            window.addEventListener('resize', syncFormHeight);
-            setTimeout(syncFormHeight, 500);
-        })();
-
         (function () {
             var API = 'https://api.azeite-rodrigues.info';
             var btn = document.getElementById('nl-submit');
@@ -1311,5 +1245,4 @@
     </script>
 
 </body>
-
 </html>
