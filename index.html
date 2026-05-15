@@ -690,13 +690,37 @@
             padding: 8px;
             box-shadow: 0 4px 32px rgba(45, 59, 28, 0.08);
             border: 1px solid var(--olive-pale);
+            /* height is set via JS to match the left column */
             overflow: hidden;
         }
 
         .gform-wrap {
             width: 100%;
-            overflow: hidden;
+            height: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
             border-radius: 4px;
+            /* style the scrollbar to match the site */
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) var(--olive-pale);
+        }
+
+        .gform-wrap::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .gform-wrap::-webkit-scrollbar-track {
+            background: var(--olive-pale);
+            border-radius: 3px;
+        }
+
+        .gform-wrap::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .gform-wrap::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-light);
         }
 
         .gform-wrap iframe {
@@ -1207,6 +1231,27 @@
     </footer>
 
     <script>
+        // Match form card height to the order-info column height
+        (function () {
+            function syncFormHeight() {
+                var info = document.querySelector('.order-info');
+                var card = document.querySelector('.form-card');
+                var wrap = document.querySelector('.gform-wrap');
+                if (!info || !card || !wrap) return;
+                if (window.innerWidth > 760) {
+                    var h = info.offsetHeight;
+                    card.style.height = h + 'px';
+                    wrap.style.height = (h - 16) + 'px';
+                } else {
+                    card.style.height = '';
+                    wrap.style.height = '1700px';
+                }
+            }
+            window.addEventListener('load', syncFormHeight);
+            window.addEventListener('resize', syncFormHeight);
+            setTimeout(syncFormHeight, 500);
+        })();
+
         (function () {
             var API = 'https://api.azeite-rodrigues.info';
             var btn = document.getElementById('nl-submit');
